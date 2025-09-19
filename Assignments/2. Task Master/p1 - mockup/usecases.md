@@ -1,6 +1,6 @@
 # Use Cases
 
-## Add Engineer
+## 1. Add Engineer
 
 **Use Case:** Add Engineer
 
@@ -17,7 +17,7 @@
 
 ---
 
-## Remove Engineer
+## 2. Remove Engineer
 
 **Use Case:** Remove Engineer
 
@@ -34,7 +34,7 @@
 
 ---
 
-## Add Task
+## 3. Add Task
 
 **Use Case:** Add Task
 
@@ -51,7 +51,7 @@
 
 ---
 
-## Remove Task
+## 4. Remove Task
 
 **Use Case:** Remove Task
 
@@ -68,7 +68,7 @@
 
 ---
 
-## Assign Task
+## 5. Assign Task
 
 **Use Case:** Assign Task
 
@@ -85,7 +85,7 @@
 
 ---
 
-## Complete Task
+## 6. Complete Task
 
 **Use Case:** Complete Task
 
