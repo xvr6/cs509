@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>TaskMaster Manager GUI Mockup</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+
+<body class="bg-gray-100 min-h-screen">
+    <div class="max-w-5xl mx-auto bg-white rounded-lg shadow-lg p-8 mt-10">
+        <h1 class="text-3xl font-bold text-center text-blue-800 mb-8">TaskMaster Manager Dashboard</h1>
+
+        <!-- Summary Section -->
+        <div class="bg-yellow-100 rounded-md p-4 mb-8 text-yellow-900 text-lg flex flex-col gap-2">
+            <div><span class="font-semibold">Unassigned Tasks (Est. Minutes):</span> <span
+                    id="unassigned-minutes">120</span>
+            </div>
+            <div><span class="font-semibold">Assigned Tasks (Est. Minutes by Engineer):</span> <span
+                    class="text-blue-700">Alice: <span id="alice-minutes">60</span></span>, <span
+                    class="text-blue-700">Bob: <span id="bob-minutes">45</span></span></div>
+            <div><span class="font-semibold">Completed Tasks (Actual Minutes):</span> <span
+                    id="completed-minutes">80</span>
+            </div>
+        </div>
+
+        <!-- Engineers Section -->
+        <div class="mb-10">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4 border-b pb-2 flex items-center gap-2">
+                Engineers
+            </h2>
+            <div class="flex flex-wrap gap-6">
+                <div class="bg-blue-50 rounded-md shadow p-4 flex-1 min-w-[220px] mb-4 flex flex-col justify-between">
+                    <div>
+                        <div class="font-bold text-blue-700 text-lg mb-1">Alice</div>
+                        <div class="mb-2">Assigned Tasks: <span id="alice-tasks">2</span></div>
+                    </div>
+                    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded w-full">Remove</button>
+                </div>
+                <div class="bg-blue-50 rounded-md shadow p-4 flex-1 min-w-[220px] mb-4 flex flex-col justify-between">
+                    <div>
+                        <div class="font-bold text-blue-700 text-lg mb-1">Bob</div>
+                        <div class="mb-2">Assigned Tasks: <span id="bob-tasks">1</span></div>
+                    </div>
+                    <button class="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded w-full">Remove</button>
+                </div>
+                <div
+                    class="bg-gray-50 rounded-md shadow p-4 flex-1 min-w-[220px] mb-4 flex flex-col gap-2 justify-between">
+                    <input type="text" placeholder="New Engineer Name" class="border rounded px-3 py-2 mb-2">
+                    <button class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded w-full">Add
+                        Engineer</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unassigned Tasks Section -->
+        <div class="mb-10">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4 border-b pb-2 flex items-center gap-2">
+                Unassigned Tasks
+            </h2>
+            <div class="flex flex-wrap gap-6">
+                <div class="bg-green-50 rounded-md shadow p-4 flex-1 min-w-[220px] mb-4 flex flex-col justify-between">
+                    <div>
+                        <div class="font-bold text-green-700 text-lg mb-1">Design UI</div>
+                        <div class="mb-2">Est. Minutes: 30</div>
+                    </div>
+                    <div class="mb-2">
+                        <select class="border rounded px-2 py-1">
+                            <option>Select...</option>
+                            <option>Alice</option>
+                            <option>Bob</option>
+                        </select>
+                    </div>
+                    <div class="flex gap-2 mb-2">
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">Assign</button>
+                        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Remove</button>
+                    </div>
+                </div>
+                <div class="bg-green-50 rounded-md shadow p-4 flex-1 min-w-[220px] mb-4 flex flex-col justify-between">
+                    <div>
+                        <div class="font-bold text-green-700 text-lg mb-1">Write Tests</div>
+                        <div class="mb-2">Est. Minutes: 45</div>
+                    </div>
+                    <div class="mb-2">
+                        <select class="border rounded px-2 py-1">
+                            <option>Select...</option>
+                            <option>Alice</option>
+                            <option>Bob</option>
+                        </select>
+                    </div>
+                    <div class="flex gap-2 mb-2">
+                        <button class="bg-blue-500 hover:bg-blue-600 text-white px-3 py-1 rounded">Assign</button>
+                        <button class="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded">Remove</button>
+                    </div>
+                </div>
+                <div
+                    class="bg-gray-50 rounded-md shadow p-4 flex-1 min-w-[220px] mb-4 flex flex-col gap-2 justify-between">
+                    <input type="text" placeholder="New Task Title" class="border rounded px-3 py-2 mb-2">
+                    <input type="number" placeholder="Est. Minutes" class="border rounded px-3 py-2 mb-2">
+                    <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded w-full">Add
+                        Task</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Assigned Tasks Section -->
+        <div class="mb-10">
+            <h2 class="text-xl font-semibold text-gray-700 mb-4 border-b pb-2 flex items-center gap-2">
+                Assigned Tasks
+            </h2>
+            <div class="flex flex-wrap gap-6">
+                <div class="bg-purple-50 rounded-md shadow p-4 flex-1 min-w-[220px] mb-4 flex flex-col justify-between">
+                    <div>
+                        <div class="font-bold text-purple-700 text-lg mb-1">Implement Logic</div>
+                        <div class="mb-2">Est. Minutes: 60</div>
+                        <div class="mb-2">Assigned to: Alice</div>
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="number" placeholder="Actual Minutes" class="border rounded px-3 py-2">
+                        <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Complete</button>
+                    </div>
+                </div>
+                <div class="bg-purple-50 rounded-md shadow p-4 flex-1 min-w-[220px] mb-4 flex flex-col justify-between">
+                    <div>
+                        <div class="font-bold text-purple-700 text-lg mb-1">Refactor Code</div>
+                        <div class="mb-2">Est. Minutes: 45</div>
+                        <div class="mb-2">Assigned to: Bob</div>
+                    </div>
+                    <div class="flex gap-2">
+                        <input type="number" placeholder="Actual Minutes" class="border rounded px-3 py-2">
+                        <button class="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded">Complete</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Completed Tasks Section -->
+        <div>
+            <h2 class="text-xl font-semibold text-gray-700 mb-4 border-b pb-2 flex items-center gap-2">
+                Completed Tasks
+            </h2>
+            <div class="flex flex-wrap gap-6">
+                <div class="bg-gray-200 rounded-md shadow p-4 flex-1 min-w-[220px] mb-4 border border-green-400">
+                    <div class="font-bold text-green-700 text-lg mb-1">Setup Project</div>
+                    <div class="mb-1">Est. Minutes: 40</div>
+                    <div class="mb-1">Actual Minutes: 35</div>
+                    <div class="mb-1">Completed by: Alice</div>
+                </div>
+                <div class="bg-gray-200 rounded-md shadow p-4 flex-1 min-w-[220px] mb-4 border border-green-400">
+                    <div class="font-bold text-green-700 text-lg mb-1">Initial Planning</div>
+                    <div class="mb-1">Est. Minutes: 50</div>
+                    <div class="mb-1">Actual Minutes: 45</div>
+                    <div class="mb-1">Completed by: Bob</div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
