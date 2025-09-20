@@ -205,12 +205,11 @@ public class C {
 
   //...
 
-  public void M(Item i) {
-    // Note: M can always access any globally accessible object within the scope of M.
-    
-     Special s = new Special(...);
-      Exotic e = s.doSomething();
-  }
+    public void M(Item i) {
+        // Note: M can always access any globally accessible object within the scope of M.
+        Special s = new Special(...);
+        Exotic e = s.doSomething();
+    }
 
 }
 ```
