@@ -1,29 +1,14 @@
-import { useState } from "react";
-import Alert from "./components/Alert";
-import { Button } from "./components/Button";
-import ListGroup from "./components/ListGroup";
+import Engineers from "./components/EngineerComponents/Engineers";
 
 function App() {
-  const cities = ["NYC", "Tokyo", "London", "Paris"];
-  const handleSelectItem = (item: string) => {
-    console.log(item);
-  };
-
-  const [alertVisible, setAlertVisibility] = useState(false);
+  const engineers: string[] = []
 
   return (
     <div>
-      {alertVisible && (
-        <Alert onClose={() => setAlertVisibility(false)}>My Alert!</Alert>
-      )}
-      <Button type="danger" onClick={() => setAlertVisibility(true)}>
-        my button
-      </Button>
-      <ListGroup
-        items={cities}
-        heading="Cities"
-        onSelectItem={handleSelectItem}
-      />
+      <h1 className="text-3xl font-bold text-center text-blue-800 mb-8">
+        TaskMaster Manager Dashboard
+      </h1>
+      <Engineers>{engineers}</Engineers>
     </div>
   );
 }
