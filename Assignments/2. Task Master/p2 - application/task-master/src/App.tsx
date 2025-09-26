@@ -1,4 +1,5 @@
 import Assigned from "./components/AssignedComponents/Assigned";
+import Completed from "./components/CompletedComponents/Completed";
 import Engineers from "./components/EngineerComponents/Engineers";
 import Tasks from "./components/TaskComponents/Tasks";
 
@@ -34,6 +35,7 @@ function App() {
           <h2 className="text-xl font-semibold text-gray-700 mb-4 border-b pb-2 flex items-center gap-2">
             Completed Tasks
           </h2>
+          <Completed></Completed>
         </div>
       </div>
     </main>
