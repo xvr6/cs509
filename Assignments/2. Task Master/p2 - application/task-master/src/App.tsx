@@ -1,5 +1,6 @@
+import Assigned from "./components/AssignedComponents/Assigned";
 import Engineers from "./components/EngineerComponents/Engineers";
-import Tasks from "./components/TaskComponents/tasks";
+import Tasks from "./components/TaskComponents/Tasks";
 
 function App() {
   const engineers: string[] = [];
@@ -16,10 +17,23 @@ function App() {
         </div>
         {/* Unassigned Tasks Section */}
         <div className="mb-10">
-          <h2 className="text-xl font-semibold text-gray-700 mb-4 flex flex-col justify-between">
+          <h2 className="text-xl font-semibold text-gray-700 mb-4 border-b pb-2 flex items-center gap-2">
             Unassigned Tasks
           </h2>
-            <Tasks></Tasks>
+          <Tasks></Tasks>
+        </div>
+        {/* Assigned Tasks */}
+        <div className="mb-10">
+          <h2 className="text-xl font-semibold text-gray-700 mb-4 border-b pb-2 flex items-center gap-2">
+            Assigned Tasks
+          </h2>
+          <Assigned></Assigned>
+        </div>
+        {/* Completed Tasks */}
+        <div>
+          <h2 className="text-xl font-semibold text-gray-700 mb-4 border-b pb-2 flex items-center gap-2">
+            Completed Tasks
+          </h2>
         </div>
       </div>
     </main>
