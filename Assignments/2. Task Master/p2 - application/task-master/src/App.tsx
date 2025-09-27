@@ -1,5 +1,5 @@
 import Assigned from "./components/AssignedComponents/AssignedDisplay";
-import Completed from "./components/CompletedComponents/CompletedDisplat";
+import Completed from "./components/CompletedComponents/CompletedDisplay";
 import Engineers from "./components/EngineerComponents/Engineers";
 import Overview from "./components/OverviewComponents/Overview";
 import Tasks from "./components/TaskComponents/Tasks";
