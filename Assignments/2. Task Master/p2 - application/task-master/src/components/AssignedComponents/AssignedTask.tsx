@@ -1,6 +1,6 @@
 function AssignedTask() {
   return (
-    <div className="bg-purple-50 rounded-md shadow p-4 flex-1 min-w-[220px] mb-4 ">
+    <div className="bg-purple-50 rounded-md shadow p-4 flex flex-1 flex-col min-w-[220px] mb-4 ">
       <div>
         <div className="font-bold text-purple-700 text-lg mb-1">
           [PH]Task Name

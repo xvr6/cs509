@@ -1,6 +1,7 @@
-import Assigned from "./components/AssignedComponents/Assigned";
-import Completed from "./components/CompletedComponents/Completed";
+import Assigned from "./components/AssignedComponents/AssignedDisplay";
+import Completed from "./components/CompletedComponents/CompletedDisplat";
 import Engineers from "./components/EngineerComponents/Engineers";
+import Overview from "./components/OverviewComponents/Overview";
 import Tasks from "./components/TaskComponents/Tasks";
 
 function App() {
@@ -9,11 +10,13 @@ function App() {
   return (
     <main>
       <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg p-8 mt-10">
+        <h1 className="text-3xl font-bold text-center text-blue-800 mb-8">
+          TaskMaster Manager Dashboard
+        </h1>
+        {/* Overview Section */}
+        <Overview></Overview>
         {/* Engineers Section */}
         <div className="mb-10">
-          <h1 className="text-3xl font-bold text-center text-blue-800 mb-8">
-            TaskMaster Manager Dashboard
-          </h1>
           <Engineers>{engineers}</Engineers>
         </div>
         {/* Unassigned Tasks Section */}

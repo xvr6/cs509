@@ -1,4 +1,4 @@
-import Engineer from "./Engineer";
+import Engineer from "./EngineerDisplay";
 import EngineerCreate from "./EngineerCreate";
 
 interface EngineersProps {
