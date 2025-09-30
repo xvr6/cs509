@@ -106,7 +106,12 @@ export class TaskMaster {
     const taskIndex = this._tasks.findIndex((t) => t.id === taskId);
     if (taskIndex !== -1) {
       const task = this._tasks[taskIndex];
-      task.complete(actualMin);
+      this._engineers.forEach((e) => {
+        if (e.id == task.assignedEngineer) {
+          e.completeTask(taskId, actualMin);
+        }
+      });
+
       this._tasks.splice(taskIndex, 1); // Remove from _tasks
       this._completedTasks.push(task); // Add to _completedTasks
     } else {

@@ -25,14 +25,12 @@ function Task({ id, name, estMin }: TaskProps) {
 
   return (
     <div className="bg-green-50 rounded-md shadow p-4 flex-1 min-w-[220px] mb-4 flex flex-col justify-between">
-      <div>
-        <div className="font-bold text-green-700 text-lg mb-1">{name}</div>
-        <div className="mb-2">Est. Minutes: {estMin}</div>
-      </div>
+      <div className="font-bold text-green-700 text-3xl">{name}</div>
+      <div className="mt-[-40px]">Est. Minutes: {estMin}</div>
       <div className="mb-2">
         <select
           id={`assign-engineer-${id}`}
-          className="border rounded px-2 py-1 min-w-[175px]"
+          className="border rounded px-2 py-1"
         >
           <option value="">Select Engineer</option>
           {taskManager.engineers.map((engineer) => (
