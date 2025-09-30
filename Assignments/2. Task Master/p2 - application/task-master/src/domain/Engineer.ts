@@ -17,7 +17,7 @@ export class Engineer {
   get name(): string {
     return this._name;
   }
-  get assignedTasks(): Task[] | undefined {
+  get assignedTasks(): Task[] {
     return this._assignedTasks;
   }
 
@@ -34,12 +34,13 @@ export class Engineer {
    */
   public completeTask(taskId: string, actualMin: number) {
     let complete = false;
-    this._assignedTasks.forEach((t) => {
-      if (t.id != taskId) return;
-      if (t.status != "ASSIGNED") return;
-      complete = true;
-      t.complete(actualMin);
-      //TODO remove from arr
+    this._assignedTasks = this._assignedTasks.filter((t) => {
+      if (t.id === taskId && t.status === "ASSIGNED") {
+        t.complete(actualMin);
+        complete = true;
+        return false; // Remove completed task from assigned tasks
+      }
+      return true;
     });
 
     if (!complete) throw new Error(`No valid task found with uuid: ${taskId}`);

@@ -65,4 +65,12 @@ export class Task {
       throw new Error(`Task is ${this._status}, unable to be completed.`);
     }
   }
+
+  /**
+   * unassign
+   */
+  public unassign() {
+    this._status = "UNASSIGNED";
+    this._assignedEngineer = "";
+  }
 }

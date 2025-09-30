@@ -1,5 +1,5 @@
-import type { Engineer } from "./Engineer";
-import type { Task } from "./Task";
+import { Engineer } from "./Engineer";
+import { Task } from "./Task";
 
 export class TaskMaster {
   private _id: string;
@@ -39,53 +39,129 @@ export class TaskMaster {
    */
   public removeEngineer(engId: string) {
     const engs = this._engineers;
+    let pos = -1;
+    //find what position in the eng array the engineer is.
     for (let i = 0; i < engs.length; i++) {
       const e = engs[i];
       if (e.id == engId) {
+        pos = i;
+        break;
       }
     }
-    this._engineers.forEach((element) => {});
+
+    if (pos !== -1) {
+      // Remove the engineer from the array
+      this._engineers.splice(pos, 1);
+
+      // Flag tasks as unassigned
+      this._tasks.forEach((task) => {
+        if (task.assignedEngineer == engId) {
+          task.unassign();
+        }
+      });
+    }
   }
 
   /**
    * addTask
    */
-  public addTask(taskId: string) {}
+  public addTask(task: Task) {
+    this._tasks = [...this._tasks, task];
+  }
 
   /**
-   * removeTask
+   * deleteTask
    */
-  public removeTask(taskId: string, engId: string) {}
+  public deleteTask(taskId: string) {
+    const taskIndex = this._tasks.findIndex(
+      (t) => t.id === taskId && t.status === "UNASSIGNED"
+    );
+
+    if (taskIndex !== -1) {
+      this._tasks.splice(taskIndex, 1);
+    }
+  }
   /**
    * completeTask
    */
-  public completeTask(taskId: string, actualMin: number) {}
+  public completeTask(taskId: string, actualMin: number) {
+    this._tasks.forEach((t) => {
+      if (t.id == taskId) {
+        t.complete(actualMin);
+      }
+    });
+  }
 
   /**
    * getUnassignedTasks
    */
   public getUnassignedTasks(): Task[] {
-    return [];
+    const uTasks: Task[] = [];
+    this._tasks.forEach((t) => {
+      if (t.status == "UNASSIGNED") {
+        uTasks.push(t);
+      }
+    });
+    return uTasks;
   }
 
   /**
    * getTotalEstMinUnassignedgetTotalEstMinUnassigned
    */
   public getTotalEstMinUnassigned(): number {
-    return 0;
+    let tot = 0;
+    this._tasks.forEach((t) => {
+      if (t.status == "UNASSIGNED") {
+        tot += t.estMin;
+      }
+    });
+    return tot;
   }
 
   /**
    * getTotalEstMinByEngineer
    */
   public getTotalEstMinByEngineer(engId: string): number {
-    return 0;
+    return this._tasks
+      .filter(
+        (task) => task.assignedEngineer === engId && task.status === "ASSIGNED"
+      )
+      .reduce((total, task) => total + task.estMin, 0);
   }
 
   /**
    * getTotalActualMinCompleted
    */
   public getTotalActualMinCompleted(): number {
-    return 0;
+    return this._completedTasks.reduce(
+      (total, task) => total + (task.actualMin || 0),
+      0
+    );
+  }
+
+  /**
+   * addEngineerByName
+   */
+  public addEngineerByName(name: string) {
+    const newEngineer = new Engineer(name);
+    this.addEngineer(newEngineer);
+  }
+
+  /**
+   * addTaskByNameAndEstMin
+   */
+  public addTaskByNameAndEstMin(name: string, estMin: number) {
+    const newTask = new Task(name, estMin);
+    this.addTask(newTask);
+  }
+
+  /**
+   * assignTaskToEngineer
+   */
+  public assignTaskToEngineer(taskId: string, engineerId: string) {
+    const task = this._tasks.find((t) => t.id === taskId);
+    if (task) {
+      task.assignTo(engineerId);
+    }
   }
 }
