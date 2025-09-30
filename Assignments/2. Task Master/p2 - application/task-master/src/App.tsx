@@ -5,8 +5,6 @@ import Overview from "./components/OverviewComponents/Overview";
 import Tasks from "./components/TaskComponents/Tasks";
 
 function App() {
-  const engineers: string[] = [];
-
   return (
     <main>
       <div className="max-w-5xl mx-auto bg-white rounded-lg shadow-lg p-8 mt-10">
