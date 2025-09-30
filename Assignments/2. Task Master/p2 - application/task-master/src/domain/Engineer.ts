@@ -57,11 +57,5 @@ export class Engineer {
     return total;
   }
 
-  /**
-   * incrementTaskCount
-   */
-  public incrementTaskCount(): void {
-    // This method is redundant as the task count is derived from the length of _assignedTasks.
-    // However, if additional logic is needed in the future, this method can be expanded.
-  }
+
 }

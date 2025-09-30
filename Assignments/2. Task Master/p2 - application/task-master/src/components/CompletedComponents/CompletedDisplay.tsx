@@ -6,12 +6,8 @@ function Completed() {
 
   return (
     <div className="flex flex-wrap gap-6">
-      {taskManager.completedTasks.map((task, index) => (
-        <CompletedTask
-          key={index}
-          name={task.name}
-          actualMin={task.actualMin || 0}
-        />
+      {taskManager.completedTasks.map((task) => (
+        <CompletedTask taskToUse={task} />
       ))}
     </div>
   );

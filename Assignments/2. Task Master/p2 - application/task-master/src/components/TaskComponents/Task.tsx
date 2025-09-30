@@ -10,6 +10,7 @@ function Task({ id, name, estMin }: TaskProps) {
   const { taskManager, updateTaskManager } = useTaskMaster();
 
   const handleAssign = () => {
+    console.log("called assign");
     const engineerId = (
       document.getElementById(`assign-engineer-${id}`) as HTMLSelectElement
     ).value;
@@ -27,11 +28,6 @@ function Task({ id, name, estMin }: TaskProps) {
       <div>
         <div className="font-bold text-green-700 text-lg mb-1">{name}</div>
         <div className="mb-2">Est. Minutes: {estMin}</div>
-        <div className="mb-2">
-          Assigned to:{" "}
-          {taskManager.engineers.find((engineer) => engineer.id === id)?.name ||
-            "Unassigned"}
-        </div>
       </div>
       <div className="mb-2">
         <select

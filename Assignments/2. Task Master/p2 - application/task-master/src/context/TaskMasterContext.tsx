@@ -1,9 +1,12 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useState } from "react";
 import { TaskMaster } from "../domain/TaskManager";
+import { Task } from "../domain/Task";
 
 interface TaskMasterContextType {
   taskManager: TaskMaster;
   updateTaskManager: (updateFn: (tm: TaskMaster) => void) => void;
+  getTaskById: (taskId: string) => Task | undefined;
+  completeTask: (taskId: string, actualMin: number) => void;
 }
 
 const TaskMasterContext = createContext<TaskMasterContextType | undefined>(
@@ -25,19 +28,17 @@ export const TaskMasterProvider: React.FC<{ children: React.ReactNode }> = ({
     setTaskManager(updatedTaskManager);
   };
 
+  const getTaskById = (taskId: string) => taskManager.getTaskById(taskId);
+  const completeTask = (taskId: string, actualMin: number) =>
+    updateTaskManager((tm) => tm.completeTask(taskId, actualMin));
+
   return (
-    <TaskMasterContext.Provider value={{ taskManager, updateTaskManager }}>
+    <TaskMasterContext.Provider
+      value={{ taskManager, updateTaskManager, getTaskById, completeTask }}
+    >
       {children}
     </TaskMasterContext.Provider>
   );
-};
-
-export const useTaskMaster = (): TaskMasterContextType => {
-  const context = useContext(TaskMasterContext);
-  if (!context) {
-    throw new Error("useTaskMaster must be used within a TaskMasterProvider");
-  }
-  return context;
 };
 
 export { TaskMasterContext };

@@ -181,18 +181,12 @@ export class TaskMaster {
    * assignTaskToEngineer
    */
   public assignTaskToEngineer(taskId: string, engineerId: string) {
-    console.log("Assigning Task:", { taskId, engineerId });
-    console.log("Current Tasks:", this._tasks);
-    console.log("Current Engineers:", this._engineers);
-
+    console.log(engineerId);
     const task = this._tasks.find((t) => t.id === taskId);
     const engineer = this._engineers.find((e) => e.id === engineerId);
 
     if (task && engineer) {
-      task.assignTo(engineerId);
-
-      // Update engineer's task count
-      engineer.incrementTaskCount();
+      engineer.assignTask(task);
 
       // Recalculate overview minutes
       this._overviewMinutesByEngineer[engineerId] =
@@ -201,5 +195,15 @@ export class TaskMaster {
       console.error("Task or Engineer not found", { task, engineer });
       throw new Error("Task or Engineer not found");
     }
+  }
+
+  /**
+   * getTaskById
+   */
+  public getTaskById(taskId: string): Task | undefined {
+    return (
+      this._tasks.find((task) => task.id === taskId) ||
+      this._completedTasks.find((task) => task.id === taskId)
+    );
   }
 }

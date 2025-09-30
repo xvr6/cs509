@@ -21,7 +21,7 @@ function Engineers() {
       <div className="flex flex-wrap gap-6">
         {taskManager.engineers.map((engineer) => (
           <Engineer
-            key={engineer.id}
+            // key={engineer.id}
             name={engineer.name}
             assignedTaskCount={engineer.assignedTasks.length}
             onRemove={() => handleRemoveEngineer(engineer.id)}
