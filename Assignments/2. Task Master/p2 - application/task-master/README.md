@@ -1,6 +1,6 @@
 # Task Master
 
-Task Master is a task management system designed to help teams efficiently manage tasks, engineers, and project workflows. Built with React, TypeScript, and Vitest, this application provides a robust and scalable solution for task tracking and assignment.
+Task Master is a task management system built with React, TypeScript.
 
 ## Project Structure
 
