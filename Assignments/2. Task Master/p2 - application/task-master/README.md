@@ -1,69 +1,67 @@
-# React + TypeScript + Vite
+# Task Master
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Task Master is a task management system designed to help teams efficiently manage tasks, engineers, and project workflows. Built with React, TypeScript, and Vitest, this application provides a robust and scalable solution for task tracking and assignment.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```plaintext
+src/
+├── components/
+│   ├── AssignedComponents/
+│   ├── CompletedComponents/
+│   ├── EngineerComponents/
+│   ├── OverviewComponents/
+│   └── TaskComponents/
+├── context/
+├── domain/
+└── tests/
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+### Key Directories
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- **components/**: Contains React components for different parts of the application.
+- **context/**: Implements the Context API for state management.
+- **domain/**: Contains domain models such as `Task`, `Engineer`, and `TaskManager`.
+- **tests/**: Contains unit tests for components and functionality.
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## Installation
+
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/xvr6/cs509.git
+   cd cs509/Assignments/2. Task Master/p2 - application/task-master
+   ```
+
+2. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+3. Start the development server:
+
+   ```bash
+   npm run dev
+   ```
+
+## Usage
+
+1. **Add Engineers**: Navigate to the Engineer section to add engineers.
+2. **Create Tasks**: Use the Task Create form to add new tasks.
+3. **Assign Tasks**: Assign tasks to engineers and track their progress.
+4. **View Overview**: Use the dashboard to monitor task distribution and completion.
+
+## Testing
+
+This project uses Vitest for testing. To run the tests:
+
+```bash
+npm run test
+```
+
+To check test coverage:
+
+```bash
+npm run test -- --coverage
 ```
