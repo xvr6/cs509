@@ -18,7 +18,9 @@ function Assigned() {
             id={task.id}
             name={task.name}
             estMin={task.estMin}
-            assignedEngineer={task.assignedEngineer || "Unknown"}
+            assignedEngineer={
+              taskManager.engineers.find((e) => e.id === task.assignedEngineer)?.name || ""
+            }
             onComplete={handleCompleteTask}
           />
         ))}

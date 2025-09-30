@@ -21,7 +21,7 @@ function Tasks() {
     <div className="flex flex-wrap gap-6">
       {taskManager.getUnassignedTasks().map((task) => (
         <Task
-          key={task.id}
+          // key={task.id}
           id={task.id}
           name={task.name}
           estMin={task.estMin}

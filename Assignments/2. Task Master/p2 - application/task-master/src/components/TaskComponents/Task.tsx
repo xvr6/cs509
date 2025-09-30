@@ -1,20 +1,25 @@
+import { useTaskMaster } from "../../context/useTaskMaster";
+
 interface TaskProps {
   id: string;
   name: string;
   estMin: number;
-  engineers: { id: string; name: string }[]; // Updated to accept objects
-  onDelete: (id: string) => void;
-  onAssign: (id: string, engineerName: string) => void;
 }
 
-function Task({ id, name, estMin, engineers, onDelete, onAssign }: TaskProps) {
+function Task({ id, name, estMin }: TaskProps) {
+  const { taskManager, updateTaskManager } = useTaskMaster();
+
   const handleAssign = () => {
-    const engineerName = (
+    const engineerId = (
       document.getElementById(`assign-engineer-${id}`) as HTMLSelectElement
     ).value;
-    if (engineerName) {
-      onAssign(id, engineerName);
+    if (engineerId) {
+      updateTaskManager((tm) => tm.assignTaskToEngineer(id, engineerId));
     }
+  };
+
+  const handleDelete = () => {
+    updateTaskManager((tm) => tm.deleteTask(id));
   };
 
   return (
@@ -22,6 +27,11 @@ function Task({ id, name, estMin, engineers, onDelete, onAssign }: TaskProps) {
       <div>
         <div className="font-bold text-green-700 text-lg mb-1">{name}</div>
         <div className="mb-2">Est. Minutes: {estMin}</div>
+        <div className="mb-2">
+          Assigned to:{" "}
+          {taskManager.engineers.find((engineer) => engineer.id === id)?.name ||
+            "Unassigned"}
+        </div>
       </div>
       <div className="mb-2">
         <select
@@ -29,9 +39,8 @@ function Task({ id, name, estMin, engineers, onDelete, onAssign }: TaskProps) {
           className="border rounded px-2 py-1 min-w-[175px]"
         >
           <option value="">Select Engineer</option>
-          {engineers.map((engineer) => (
-            <option key={engineer.id} value={engineer.name}>
-              {" "}
+          {taskManager.engineers.map((engineer) => (
+            <option key={engineer.id} value={engineer.id}>
               {engineer.name}
             </option>
           ))}
@@ -45,7 +54,7 @@ function Task({ id, name, estMin, engineers, onDelete, onAssign }: TaskProps) {
       </div>
       <div className="flex gap-2 mb-2">
         <button
-          onClick={() => onDelete(id)}
+          onClick={handleDelete}
           className="bg-red-500 hover:bg-red-600 text-white px-3 py-1 rounded"
         >
           Delete Task

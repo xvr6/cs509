@@ -6,12 +6,24 @@ export class TaskMaster {
   private _engineers: Engineer[];
   private _tasks: Task[];
   private _completedTasks: Task[];
+  private _overviewMinutesByEngineer: { [key: string]: number };
 
-  constructor(engineers?: Engineer[], task?: Task[], completedTasks?: Task[]) {
+  constructor(
+    engineers?: Engineer[],
+    task?: Task[],
+    completedTasks?: Task[],
+    overviewMinutes?: { [key: string]: number }
+  ) {
     this._id = crypto.randomUUID();
     this._engineers = engineers || [];
     this._tasks = task || [];
     this._completedTasks = completedTasks || [];
+    this._overviewMinutesByEngineer = overviewMinutes || {};
+
+    // Initialize overview minutes for each engineer
+    this._engineers.forEach((engineer) => {
+      this._overviewMinutesByEngineer[engineer.id] = 0;
+    });
   }
 
   get id(): string {
@@ -32,6 +44,9 @@ export class TaskMaster {
    */
   public addEngineer(eng: Engineer) {
     this._engineers.push(eng);
+
+    // Initialize overview minutes for the new engineer
+    this._overviewMinutesByEngineer[eng.id] = 0;
   }
 
   /**
@@ -59,6 +74,9 @@ export class TaskMaster {
           task.unassign();
         }
       });
+
+      // Remove engineer's overview minutes
+      delete this._overviewMinutesByEngineer[engId];
     }
   }
 
@@ -85,11 +103,15 @@ export class TaskMaster {
    * completeTask
    */
   public completeTask(taskId: string, actualMin: number) {
-    this._tasks.forEach((t) => {
-      if (t.id == taskId) {
-        t.complete(actualMin);
-      }
-    });
+    const taskIndex = this._tasks.findIndex((t) => t.id === taskId);
+    if (taskIndex !== -1) {
+      const task = this._tasks[taskIndex];
+      task.complete(actualMin);
+      this._tasks.splice(taskIndex, 1); // Remove from _tasks
+      this._completedTasks.push(task); // Add to _completedTasks
+    } else {
+      throw new Error("Task not found");
+    }
   }
 
   /**
@@ -159,9 +181,25 @@ export class TaskMaster {
    * assignTaskToEngineer
    */
   public assignTaskToEngineer(taskId: string, engineerId: string) {
+    console.log("Assigning Task:", { taskId, engineerId });
+    console.log("Current Tasks:", this._tasks);
+    console.log("Current Engineers:", this._engineers);
+
     const task = this._tasks.find((t) => t.id === taskId);
-    if (task) {
+    const engineer = this._engineers.find((e) => e.id === engineerId);
+
+    if (task && engineer) {
       task.assignTo(engineerId);
+
+      // Update engineer's task count
+      engineer.incrementTaskCount();
+
+      // Recalculate overview minutes
+      this._overviewMinutesByEngineer[engineerId] =
+        this.getTotalEstMinByEngineer(engineerId);
+    } else {
+      console.error("Task or Engineer not found", { task, engineer });
+      throw new Error("Task or Engineer not found");
     }
   }
 }
